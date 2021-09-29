@@ -1,45 +1,27 @@
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.concurrent.LinkedBlockingDeque;
 
 public class Main {
 
     public static void main(String[] args) {
-//        testArrList();
-        testLinkList();
-    }
 
-    public static void testLinkList(){
-        LinkedList<Integer> linkedList = new LinkedList<>();
+        String hello = "Hello";
+        String world = "world";
 
-    }
+        int a = 10;
 
-    public static void testArrList(){
-        ArrayList<Integer> arrayList = new ArrayList<>();
+        double d1 = 1.00001;
+        double d2 = 1.00000999999;
 
-        Integer a = 2;
-        arrayList.add(a);
-        arrayList.add(1);
-        arrayList.add(2);
-        arrayList.add(1,3);
-        arrayList.add(4);
-        arrayList.add(5);
+        BigDecimal one = new BigDecimal(d1);
+        BigDecimal two = new BigDecimal(d2);
 
-        for (Integer i : arrayList){
-            System.out.println(i);
-        }
+        StringBuilder builder = new StringBuilder(hello + ' ' + world);
+        builder.replace(6,11, "Java");
 
-        System.out.println(arrayList.get(0));
-        System.out.println(arrayList.indexOf(a));
-        System.out.println(arrayList.indexOf(999));
+        System.out.println(hello + ' ' + world);
+        System.out.println(one.compareTo(two));
+        System.out.println(builder);
 
-        arrayList.remove(3);
-        arrayList.remove(a);
-
-        for (Integer i : arrayList){
-            System.out.println(i);
-        }
     }
 
 }
