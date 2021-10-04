@@ -1,27 +1,48 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.math.BigDecimal;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        String hello = "Hello";
-        String world = "world";
 
-        int a = 10;
+        Thread thread1 = new Thread() {
+            Integer time = 0;
 
-        double d1 = 1.00001;
-        double d2 = 1.00000999999;
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        sleep(1000);
+                        time++;
+                        System.out.println(time + " seconds left");
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        };
 
-        BigDecimal one = new BigDecimal(d1);
-        BigDecimal two = new BigDecimal(d2);
 
-        StringBuilder builder = new StringBuilder(hello + ' ' + world);
-        builder.replace(6,11, "Java");
+        Chronometer chronometer = new Chronometer();
+        SecondsWaiter secondsWaiter5 = new SecondsWaiter(5, chronometer);
+        SecondsWaiter secondsWaiter7 = new SecondsWaiter(7, chronometer);
 
-        System.out.println(hello + ' ' + world);
-        System.out.println(one.compareTo(two));
-        System.out.println(builder);
+//        chronometer.start();
+//        secondsWaiter5.start();
+//        secondsWaiter7.start();
+
+
+        //////////////////////////////
+
+        LinkedBlockingQueue linkedBlockingQueue = new LinkedBlockingQueue(3);
+        Producer producer = new Producer(700, linkedBlockingQueue);
+        Consumer consumer = new Consumer(900, linkedBlockingQueue);
+        producer.start();
+        consumer.start();
 
     }
-
 }
